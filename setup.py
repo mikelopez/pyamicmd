@@ -2,8 +2,8 @@ from distutils.core import setup
 
 setup(name='pyamicmd',
       version='0.1',
-      description='Send commands to Asterisk via AMI',
-      author='',
+      description='Send commands to Asterisk via AMI using amiwrapper and starpy',
+      author='Marcos Lopez',
       license='MIT',
       py_modules=['pyamicmd'],
       classifiers=[
