@@ -1,6 +1,6 @@
 """
 Test AMI commands using strictly starpy and reactor
-
+No test runner or assertions used.
 """
 from test_base import *
 e, w, i = "ERROR", "WARNING", "INFO"
