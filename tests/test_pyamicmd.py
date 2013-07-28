@@ -1,7 +1,7 @@
 from test_base import *
 from amiwrapper import AMIWrapper
 
-class TestAMIWrapper(TestAMIBase):
+class TestAMICommand(TestAMIBase):
     """ Test the AMIWrapper class """
 
     def test_send_command(self):
