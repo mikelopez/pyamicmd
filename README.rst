@@ -10,7 +10,7 @@ Requirements
 Based on starpy and amiwrapper. See requirements.txt for more details
 
 
-Settings
+Settings (Optional)
 ---------
 Create a local_settings.py file with the following auth variables.
  - PBX = the host (ip or name) of th system
@@ -22,6 +22,7 @@ Usage
 ------
 
 .. code-block:: python
+
 	from pyamicmd import *
 	cl = AMICommand(host="x.x.x.x", user="admin", pwd="password")
 	cl.set_command("dialplan show from-internal")
@@ -31,6 +32,7 @@ Response
 ---------
 
 .. code-block:: 
+
 	>>> for i in cmd.response:
 	...     print i
 	... 
