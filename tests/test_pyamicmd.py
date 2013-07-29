@@ -1,6 +1,10 @@
 from test_base import *
 from amiwrapper import AMIWrapper
 
+sys.path.append('../')
+sys.path.append('../pyamicmd')
+from pyamicmd import AMICommand
+
 command = "dialplan show from-internal"
 
 class TestAMICommand(TestAMIBase):
@@ -23,7 +27,7 @@ class TestAMICommand(TestAMIBase):
         cl = AMICommand()
         cl.set_command(command)
         self.assertTrue(cl.get_command() == command)
-        
+
         termprint("INFO", "Running the command on Asterisk...")
         cl.command()
         self.assertTrue(cl.response)
@@ -31,5 +35,5 @@ class TestAMICommand(TestAMIBase):
 
 if __name__ == '__main__':
     suite = TestSuite()
-    suite.addTest(TestAMIWrapper("test_send_command"))
+    suite.addTest(TestAMICommand("test_send_command"))
     TextTestRunner(verbosity=2).run(suite)

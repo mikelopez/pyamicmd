@@ -5,7 +5,7 @@ setup(name='pyamicmd',
       description='Send commands to Asterisk via AMI using amiwrapper and starpy',
       author='Marcos Lopez',
       license='MIT',
-      py_modules=['pyamicmd'],
+      py_modules=['pyamicmd.pyamicmd'],
       classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Console',
