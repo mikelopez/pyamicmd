@@ -1,15 +1,11 @@
 from test_base import *
-from amiwrapper import AMIWrapper
-
-sys.path.append('../')
-sys.path.append('../pyamicmd')
-from pyamicmd import AMICommand
+from amiwrapper import *
+from pyamicmd.pyamicmd import *
 
 command = "dialplan show from-internal"
 
 class TestAMICommand(TestAMIBase):
     """ Test the AMIWrapper class """
-
 
     def test_send_command(self):
         """ Test sending a command to AMI using wrapper.

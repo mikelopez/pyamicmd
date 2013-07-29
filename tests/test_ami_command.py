@@ -34,7 +34,7 @@ class TestAMICommand():
             dfc.addCallbacks(onResult, onError)
             dfc.addCallbacks(onFinished, onFinished)
             return dfc
-            
+
         def onError(ami):
             termprint(e, dir(ami))
             termprint(e, "Stopping Reactor")
@@ -45,7 +45,6 @@ class TestAMICommand():
 
         session = manager.AMIFactory(un, pw)
         df = session.login(h, 5038).addCallbacks(onConnect, onError)
-        
 
         termprint(i, "Login response: \n%s" % dir(df))
 

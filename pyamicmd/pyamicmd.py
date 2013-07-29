@@ -1,4 +1,4 @@
-from pyamicmd import *
+from amiwrapper import *
 # import the settings locally
 import settings
 
@@ -14,7 +14,7 @@ class AMICommand(AMIWrapper):
 
     def __init__(self, **kwargs):
         # overwrite defaults frm any kwargs
-        super(AMICommand, self).__init__(self, **kwargs)
+        super(AMICommand, self).__init__(**kwargs)
         for k, v in kwargs.items():
             if k in self.allowed_keys:
                 setattr(self, k, v) 
@@ -33,7 +33,7 @@ class AMICommand(AMIWrapper):
         if cmd_override:
             self.set_command(cmd_override)
         if not self.get_command():
-            self.__exception(e, "No command to send. set class.command = 'command to send'")
+            self.exception(e, "No command to send. set class.command = 'command to send'")
 
         def on_connect(ami):
             # on connect callback
@@ -46,10 +46,10 @@ class AMICommand(AMIWrapper):
             def on_error(error):
                 # callback when any errors occur
                 self.response = error
-                self.__exception(error.getTraceback())
+                self.exception(error.getTraceback())
             def on_complete(result):
                 # when completed, just stop the reactor cause were done
-                self.__stop_reactor()
+                self.stop_reactor()
 
             termprint(w, self.get_command())                
             df.addCallbacks(on_result, on_error)
@@ -57,27 +57,24 @@ class AMICommand(AMIWrapper):
 
         def on_error(ami):
             # if any errors with intial login, we call __exception
-            self.__exception(ami)
+            self.exception(ami)
 
-        df = self.__set_session().login(self.host, 5038).addCallbacks(on_connect, on_error)
+        df = self.set_session().login(self.host, 5038).addCallbacks(on_connect, on_error)
         if not self.session:
-            self.__exception("Failed to set the session")
+            self.exception("Failed to set the session")
         if not df:
-            self.__exception(df)
+            self.exception(df)
 
     def command(self):
         # start the reactor 
-        self.__run_reactor(self.__command)
-
-        
-
+        self.run_reactor(self.__command)
 
 
 if __name__ == '__main__':
     #manager.log.setLevel(logging.DEBUG)
 
     # send a command
-    cl = AMIWrapper(command="dialplan show from-internal")
+    cl = AMICommand(command_txt="dialplan show from-internal")
     reactor.callWhenRunning(cl.command)
     reactor.run()
 
