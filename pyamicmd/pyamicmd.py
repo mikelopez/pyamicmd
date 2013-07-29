@@ -1,14 +1,20 @@
 from amiwrapper import *
 # import the settings locally
-import settings
+try:
+    import settings
+    user = getattr(settings, "AMI_USER")
+    pwd = getattr(settings, "AMI_PASS")
+    host = getattr(settings, "PBX")
+except ImportError:
+    user, pwd, host = "", "", ""
 
 i, e, w = "INFO", "ERROR", "WARNING"
 
 class AMICommand(AMIWrapper):
     """ Base class wrapper file for call originating with starpy """
-    user = getattr(settings, "AMI_USER")
-    pwd = getattr(settings, "AMI_PASS")
-    host = getattr(settings, "PBX")
+    user = user
+    pwd = pwd
+    host = host
     command_txt = ""
     response = ""
 
