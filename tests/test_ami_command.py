@@ -1,6 +1,10 @@
 """
 Test AMI commands using strictly starpy and reactor
-No test runner or assertions used.
+
+This example illustrates a simple call to command()
+which will execute a command to asterisk via AMI
+without using amiwrapper/pyamicmd's wrapper functionality.
+
 """
 from test_base import *
 e, w, i = "ERROR", "WARNING", "INFO"

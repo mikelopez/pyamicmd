@@ -1,22 +1,30 @@
 from test_base import *
 from amiwrapper import AMIWrapper
 
+command = "dialplan show from-internal"
+
 class TestAMICommand(TestAMIBase):
     """ Test the AMIWrapper class """
+
 
     def test_send_command(self):
         """ Test sending a command to AMI using wrapper.
         It should only allow allowed_keys as kwargs.
+        Additionally tests get/set command
         """
-        # not allowed kwarg command
-        cl = AMICommand(command="dialplan show from-internal")
-        self.assertFalse(cl.get_command() == "dialplan show from-internal")
+        # "command" kwarg is not in allowed keys
+        cl = AMICommand(command=command)
+        self.assertFalse(cl.get_command() == command)
+        # allowed key
+        cl = AMICommand(command_txt=command)
+        self.assertTrue(cl.get_command() == command)
+
         # allowed kwarg to specify the command to send
         cl = AMICommand()
-        cl.set_command("dialplan show from-internal")
-        self.assertTrue(cl.get_command() == "dialplan show from-internal")
+        cl.set_command(command)
+        self.assertTrue(cl.get_command() == command)
         
-        termprint("INFO", "Running command...")
+        termprint("INFO", "Running the command on Asterisk...")
         cl.command()
         self.assertTrue(cl.response)
         termprint("INFO", "Response: \n%s" % cl.response)
